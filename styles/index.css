@@ -1,0 +1,22 @@
+/* purgecss start ignore */
+@tailwind base;
+@tailwind components;
+/* purgecss end ignore */
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: 'GOVER';
+        src: url('/fonts/GOVER.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'ROBOTO';
+        src: url('/fonts/Roboto-Regular.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'PLAGUE';
+        src: url('/fonts/PLAGUE.ttf') format('truetype');
+    }
+}
