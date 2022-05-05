@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ['./components/**/*.tsx', './pages/**/*.tsx','./public/**/*.html'], //add this line
+  purge: ['./src/common/components/**/*.tsx', './src/pages/**/*.tsx','./public/**/*.html'], //add this line
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -11,12 +11,13 @@ module.exports = {
         current: 'currentColor',
         'primary': '#1373E5',
         'primary-hover': '#0D66D0',
+        'lpi-gray': '#292E32',
+        'lpi-gray-dark': '#1D2123',
+        'lpi-gray-light': '#E9EDED',
+        'lpi-red': '#D10910'
       },
       animation: {
         wiggle: 'wiggle 1s ease-in-out infinite',
-      },
-      fontFamily: {
-        sans: ['PLAGUE', 'ROBOTO', 'GOVER', 'CONFESSION', 'CHURSTYROCK', 'S0BERFONT', 'SPLINESANS', 'Helvetica', 'Arial', 'sans-serif']
       },
       maxWidth: {
         '8xl': '100rem',
