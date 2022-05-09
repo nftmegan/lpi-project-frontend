@@ -2,15 +2,17 @@ import React, {Fragment, useEffect, useContext, useState} from 'react';
 import { Dialog, Transition } from "@headlessui/react";
 import Link from 'next/Link'
 
-interface TextLinkProps {
+interface Props {
     text: string;
     link: string;
 }
 
-const TextLink = (props: TextLinkProps) => {
+const TextLink = (props: Props) => {
     return (
         <Link href={props.link}>
-            <a className="text-primary hover:text-primary-hover hover:underline">{props.text}</a>
+            <a className="text-indigo-600 hover:text-indigo-900">
+                {props.text}
+            </a>
         </Link>
     );
 }

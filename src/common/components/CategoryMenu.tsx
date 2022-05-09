@@ -21,21 +21,23 @@ const CategoryMenu = () => {
                         filteredCategories ?
                             filteredCategories.map((category) => {
                                 return (
-                                    <div key={category._id} className="hover:bg-lpi-gray hover:cursor-pointer shadow-2xl w-32 text-sm">
-                                        <Link href={`/category/${category._id}`}>
-                                            <div className="p-2">
-                                                <div className="w-12 p-1 mx-auto">
-                                                    <Image
-                                                        src={`/icons/category_icon.png`}
-                                                        alt={"cart"}
-                                                        width={"100%"}
-                                                        height={"100%"}
-                                                        layout="responsive"
-                                                    />
+                                    <div key={category._id} className="hover:bg-lpi-gray hover:cursor-pointer shadow w-32 text-sm">
+                                        <div className="transition-transform duration-150 ease-out hover:scale-110">
+                                            <Link href={`/category/${category._id}`}>
+                                                <div className="p-2">
+                                                    <div className="w-12 p-1 mx-auto">
+                                                        <Image
+                                                            src={`/icons/category_icon.png`}
+                                                            alt={"cart"}
+                                                            width={"100%"}
+                                                            height={"100%"}
+                                                            layout="responsive"
+                                                        />
+                                                    </div>
+                                                    <span className="text-gray-100">{`${category.name}`}</span>
                                                 </div>
-                                                <span className="text-gray-100">{`${category.name}`}</span>
-                                            </div>
-                                        </Link>
+                                            </Link>
+                                        </div>
                                     </div>
                                 );
                             })

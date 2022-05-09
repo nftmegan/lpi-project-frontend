@@ -6,7 +6,9 @@ import Image from 'next/Image'
 
 import { useSession, signIn, signOut } from "next-auth/react"
 
-import { getUser } from "../utils/backend/user";
+import { getUser } from '../../utils/backend/user'
+
+import CartButton from './CartButton'
 
 const topMenu = [
     {
@@ -115,26 +117,21 @@ const Topbar = () => {
                         </div>
                         <div className="col-span-1">
                             <div className="flex space-x-8 items-center w-full justify-end">
-                                <Link href="/cart">
-                                    <div className="p-1 hover:bg-lpi-gray-dark rounded-full hover:cursor-pointer">
-                                        <div className="w-12">
-                                            <img
-                                                src={`/icons/cart.png`}
-                                                alt={"cart"}
-                                            />
-                                        </div> 
-                                    </div>
-                                </Link>
+                                <div className="mt-1">
+                                    <CartButton/>
+                                </div>
 
                                 <Link href="/clientarea">
-                                    <div className="flex items-center hover:bg-lpi-gray-dark hover:cursor-pointer space-x-2 p-1 rounded-full">
-                                        <div className="w-10">
-                                            <img
-                                                src={`/icons/clientarea.png`}
-                                                alt={"clientarea"}
-                                            />
+                                    <div className="transition-transform duration-150 ease-out hover:scale-110">
+                                        <div className="flex items-center rounded-full hover:bg-lpi-gray-dark hover:cursor-pointer space-x-2 p-1">
+                                            <div className="w-10">
+                                                <img
+                                                    src={`/icons/clientarea.png`}
+                                                    alt={"clientarea"}
+                                                />
+                                            </div>
+                                            <span className="text-white text-sm">{"Área Cliente"}</span>
                                         </div>
-                                        <span className="text-white text-sm">{"Área Cliente"}</span>
                                     </div>
                                 </Link>
                             </div>

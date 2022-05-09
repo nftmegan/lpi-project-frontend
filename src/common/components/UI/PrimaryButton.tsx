@@ -4,15 +4,17 @@ import { Dialog, Transition } from "@headlessui/react";
 interface Props {
     text: string;
     type: string;
+    disabled?: boolean;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const PrimaryButton = (props: Props) => {
     return (
-        <button type={props.type as "button" | "submit" | "reset"} onClick={props.onClick}
+        <button disabled={props.disabled} type={props.type as "button" | "submit" | "reset"} onClick={props.onClick}
             className="w-full inline-flex justify-center rounded-md border border-transparent
             shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700
-            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
+            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm
+            disabled:opacity-40"
         >
             {props.text}
         </button>

@@ -103,7 +103,9 @@ const CartPage = () => {
                                 </p>
                             </div>
                         </div>
-                        <PrimaryButton type="button" text="Finalizar encomenda"/>
+                        <Link href="/checkout">
+                            <PrimaryButton type="button" text="Finalizar encomenda"/>
+                        </Link>
                     </div>
                 </div>
             </div>

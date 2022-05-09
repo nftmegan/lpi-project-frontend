@@ -3,7 +3,7 @@ import React, { ReactNode, useState, useEffect, Fragment } from 'react';
 
 import { getAddresses, deleteAddress } from "../../../utils/backend/address";
 
-import { TrashIcon} from '@heroicons/react/outline'
+import { TrashIcon } from '@heroicons/react/outline'
 
 import WidgetLayout from "../WidgetLayout";
 

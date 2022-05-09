@@ -16,18 +16,20 @@ import {
 
 import Link from 'next/Link'
 import Image from 'next/Image'
-  
+import { useRouter } from 'next/router'
+
+
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-var navigationData = [
-    { name: 'Dashboard', href: '/admin', icon: HomeIcon, current: false },
-    { name: 'Funcionários', href: '/admin/employees', icon: UsersIcon, current: false },
-    { name: 'Categorias', href: '/admin/categories', icon: FolderIcon, current: false },
-    { name: 'Produtos', href: '/admin/products', icon: CalendarIcon, current: false },
-    { name: 'Encomendas', href: '/admin/orders', icon: InboxIcon, current: false },
-    { name: 'Análise', href: '/admin/analytics', icon: ChartBarIcon, current: false },
+var navigation = [
+    { name: 'Dashboard', href: '/admin', icon: HomeIcon },
+    { name: 'Funcionários', href: '/admin/employees', icon: UsersIcon },
+    { name: 'Categorias', href: '/admin/categories', icon: FolderIcon },
+    { name: 'Produtos', href: '/admin/products', icon: CalendarIcon },
+    { name: 'Encomendas', href: '/admin/orders', icon: InboxIcon },
+    { name: 'Análise', href: '/admin/analytics', icon: ChartBarIcon },
 ];
 
 interface SidebarProps {
@@ -36,22 +38,14 @@ interface SidebarProps {
 }
 
 const Sidebar = (props:SidebarProps) => {
-    const [navigation, setNavigation] = useState<any[]>();
+    const router = useRouter();
 
-    useEffect(() => {
-        var currentPath = window.location.pathname;
-
-        var navigationTemp = [];
-
-        navigationData.forEach((n) => {
-            n.current = false;
-            if(n.href === currentPath)
-                n.current = true;
-            navigationTemp.push(n);
-        });
-
-        setNavigation(navigationTemp);
-    }, []);
+    const isActive = (href) => {
+        console.log(href, router.pathname, href == router.pathname)
+        if(href == router.pathname)
+            return true;
+        return false;
+    }
 
     return (
         <div>
@@ -110,17 +104,17 @@ const Sidebar = (props:SidebarProps) => {
                             </div>
                             <nav className="mt-5 px-2 space-y-1">
                             {
-                                navigation?.map((item) => (
+                                navigation.map((item) => (
                                     <div key={item.name}>
                                         <Link href={item.href}>
                                             <div
                                                 className={classNames(
-                                                    item.current ? 'bg-lpi-gray-dark text-white' : 'text-gray-300 hover:text-white',
+                                                    isActive(item.href) ? 'bg-lpi-gray-dark text-white' : 'text-gray-300 hover:text-white',
                                                     'group flex items-center px-2 py-2 text-sm font-medium rounded-md')}
                                             >
                                                 <item.icon
                                                     className={classNames(
-                                                    item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300',
+                                                        isActive(item.href) ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300',
                                                     'mr-3 flex-shrink-0 h-6 w-6'
                                                     )}
                                                     aria-hidden="true"
@@ -182,12 +176,12 @@ const Sidebar = (props:SidebarProps) => {
                                 <Link href={item.href}>
                                     <div
                                         className={classNames(
-                                            item.current ? 'bg-lpi-gray-dark text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                            isActive(item.href) ? 'bg-lpi-gray-dark text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                             'group flex items-center px-2 py-2 text-sm font-medium rounded-md hover:cursor-pointer')}
                                     >
                                         <item.icon
                                             className={classNames(
-                                            item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300',
+                                            isActive(item.href) ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300',
                                             'mr-3 flex-shrink-0 h-6 w-6'
                                             )}
                                             aria-hidden="true"
