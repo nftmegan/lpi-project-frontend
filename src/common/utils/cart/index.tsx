@@ -46,9 +46,12 @@ export const deleteCartUtil = async () => {
 export const getUserCartUtil = async () => {
     var cart = JSON.parse(window.localStorage.getItem("cart"));
 
-    const result = await getCartProductData(cart);
-
     var newArr = [];
+
+    if(!cart)
+        return newArr;
+
+    const result = await getCartProductData(cart);
 
     cart.forEach((e) => {
         result.forEach((p) => {
@@ -63,10 +66,6 @@ export const getUserCartUtil = async () => {
 }
 
 const getCartProductData = async (cart) => {
-    if(!cart)
-        return [];
-
-
     var ids = "";
     cart.forEach((e) => {
         ids = ids.concat(e.productId + ',');
