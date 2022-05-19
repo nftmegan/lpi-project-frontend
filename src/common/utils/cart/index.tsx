@@ -48,8 +48,10 @@ export const getUserCartUtil = async () => {
 
     var newArr = [];
 
-    if(!cart)
+    if(!cart) {
+        window.localStorage.setItem("cart", JSON.stringify(newArr));
         return newArr;
+    }
 
     const result = await getCartProductData(cart);
 
