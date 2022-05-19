@@ -14,7 +14,6 @@ type Props = {
     setOpen?: Function;
 }
 
-
 const NewCategoryForm = (props:Props) => {
     const { data : categories, error : categoriesError} = getCategories();
     const [filteredCategories, setFilteredCategories] = useState<any[]>();
@@ -49,6 +48,8 @@ const NewCategoryForm = (props:Props) => {
         }
         
         alert(result_msg);
+
+        props.setOpen(false);
     }
 
     return (

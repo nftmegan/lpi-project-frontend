@@ -7,26 +7,21 @@ import { Dialog, Transition } from "@headlessui/react";
 import Link from 'next/Link'
 import Image from 'next/Image'
 
-import { getCategories } from "../../utils/backend/category";
+import { getUserCart } from "../../utils/backend/user";
 
 import { PrimaryButton } from "../UI";
 
-const products = [
-    {
-        _id: 1,
-        name: "Corsair Vengeance RGB PRO Black - Módulo de memória DDR4-RAM 3600 MHz"
-    },
-    {
-        _id: 2,
-        name: "Lian-Li Caixa PC preta O11D Mini -X O11D Mini -X Torre Midi 1 unidade"
-    }
-]
+import { useSession } from "next-auth/react"
 
 const CartPage = () => {
-    /*
-    const { data : categories, error : categoriesError} = getCategories();
-    const filteredCategories = categories ? categories.filter(c => { return c.parent === null }) : categories;
-    */
+    const { data: session, status } = useSession()
+    const { data : cart, error : cartError} = getUserCart(session);
+    
+    useEffect(() => {
+        console.log("waiotng")
+        if(cart)
+            console.log(cart);
+    }, [cart])
 
     return (
         <div className="space-y-4">
@@ -37,10 +32,10 @@ const CartPage = () => {
                 <div className="col-span-4 rounded-lg">
                     <div className="">
                         {
-                            products ?
-                                products.map((product) => {
+                            cart ?
+                                cart.products.map((e) => {
                                     return (
-                                        <div key={product._id} className="shadow-lg border w-full text-sm p-6 bg-white">
+                                        <div key={e._id} className="shadow-lg border w-full text-sm p-6 bg-white">
                                             <div className="flex gap-6">
                                                 <div className="col-span-1">
                                                     <div className="w-24 p-1">
@@ -51,7 +46,7 @@ const CartPage = () => {
                                                     </div>
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <div className="text-black text-sm">{`${product.name}`}</div>
+                                                    <div className="text-black text-sm">{`${e.product.name}`}</div>
 
                                                     <div className="text-black text-lg">{`€82,24 (99,51 € IVA incluído)`}</div>
 

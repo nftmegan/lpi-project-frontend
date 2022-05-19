@@ -1,15 +1,26 @@
 import useSWR from 'swr'
+import { isFunction } from 'util';
 
 import { apiURL } from "../config";
 
 export const getProduct = (id) => {
-    const fetcher = (url) => fetch(url).then((res) => res.json());
+    const fetcher = (url) => fetch(url).then((res) => res.json() );
     return useSWR(`${apiURL}/product/${id}`, fetcher);
 }
 
-export const getProducts = () => {
+export const getProducts = (query?) => {
+    var fetch_url = `${apiURL}/product`
+
+    if(query) {
+        query.forEach((q) => {
+            fetch_url = fetch_url.concat("?" + q.key + "=" + q.value);
+        })
+    }
+
+    console.log(fetch_url)
+    
     const fetcher = (url) => fetch(url).then((res) => res.json());
-    return useSWR(`${apiURL}/product/`, fetcher);
+    return useSWR(fetch_url, fetcher);
 }
 
 export const createProduct = async (data) => {
@@ -27,6 +38,8 @@ export const createProduct = async (data) => {
 }
 
 export const deleteProduct = async (id) => {
+    console.log(id);
+
     try {
         const response = await fetch(`${apiURL}/product/${id}`, {
             method: 'DELETE'

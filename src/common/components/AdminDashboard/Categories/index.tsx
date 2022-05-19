@@ -72,15 +72,7 @@ const CategoriesPage = () => {
                                     <tr>
                                         <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
                                             <div className="group inline-flex hover:cursor-pointer" onClick={() => {}}>
-                                                id
-                                                <span className="ml-2 flex-none rounded bg-gray-200 text-gray-900 group-hover:bg-gray-300">
-                                                    <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
-                                                </span>
-                                            </div>
-                                        </th>
-                                        <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                            <div className="group inline-flex hover:cursor-pointer" onClick={() => {}}>
-                                                Name
+                                                Nome
                                                 <span className="ml-2 flex-none rounded bg-gray-200 text-gray-900 group-hover:bg-gray-300">
                                                     <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
                                                 </span>
@@ -112,10 +104,11 @@ const CategoriesPage = () => {
                                     <tbody className="divide-y divide-gray-200 bg-white">
                                         {filteredCategories?.map((category, categoryIdx) => (
                                             <tr key={category._id} className={categoryIdx % 2 === 0 ? undefined : 'bg-gray-50'}>
-                                                <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{category._id}</td>
                                                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{category.name}</td>
                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.description}</td>
-                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.parent}</td>
+                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    { category.parent ? category.parent.name : "--"}
+                                                </td>
                                                 <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 flex space-x-4">
                                                     <a href="#" className="text-indigo-600 hover:text-indigo-900">
                                                         Editar

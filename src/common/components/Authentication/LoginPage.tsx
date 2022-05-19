@@ -32,6 +32,14 @@ const LoginForm = () => {
     const loginUser = async event => {
         event.preventDefault()
         signIn("credentials", { email: event.target.email.value, password: event.target.password.value });
+
+        const session = await getSession()
+        
+        if(session) {
+            console.log("Successful login")
+            window.sessionStorage.setItem("userId", session.user.id);
+            window.sessionStorage.setItem("token", session.user.accessToken);
+        }
     }
     
     return (

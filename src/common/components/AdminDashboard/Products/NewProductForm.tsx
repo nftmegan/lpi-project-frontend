@@ -35,11 +35,14 @@ const NewProductForm = (props:Props) => {
             return;
         }
 
+        console.log(event.target);
+
         let formData = new FormData(event.target);
         formData.append('photo', uploadedPhoto);
 
         var result = await createProduct(formData);
-    
+        
+        
         var result_msg = "";
         if(result.errors) {
             result_msg = result.errors[0].msg;
@@ -49,9 +52,9 @@ const NewProductForm = (props:Props) => {
             result_msg = "Criado um produto"
         }
 
-        props.setOpen(false);
-
         alert(result_msg);
+        
+        props.setOpen(false);
     }
 
     return (

@@ -13,7 +13,7 @@ const LandingPage = () => {
     return (
         <div className="w-full">
             <div className="text-2xl text-center text-gray-600">
-                Bem vindo, utilizador!
+                
             </div>
         </div>
     );

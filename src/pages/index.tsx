@@ -6,7 +6,7 @@ import LandingPage from '../common/components/LandingPage';
 const IndexPage: NextPage = () => {
     return (
         <MainLayout>
-          <LandingPage/>
+            <LandingPage/>
         </MainLayout>
     );
 };

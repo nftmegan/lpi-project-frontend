@@ -31,13 +31,18 @@ const CreateAddressTab = () => {
         });
 
         var result = await createAddress(data);
-    
-        if(result.errors) {
-            emitNotification("error", result.errors[0].msg);
+
+        var result_msg;
+        if(result) {
+            if(result.errors) {
+                result_msg = result.errors[0].msg;
+            }
+            else {
+                result_msg = "Adicionada uma nova morada"
+            }
         }
-        else {
-            emitNotification("success", "Adicionada uma nova morada");
-        }
+
+        emitNotification("success", result_msg);
     }
 
     return (

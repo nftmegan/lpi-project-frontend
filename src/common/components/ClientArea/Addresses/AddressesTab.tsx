@@ -3,6 +3,8 @@ import React, { ReactNode, useState, useEffect, Fragment } from 'react';
 
 import { getAddresses, deleteAddress } from "../../../utils/backend/address";
 
+import NotificationEmitter from "../../Notifications/NotificationEmitter";
+
 import { TrashIcon } from '@heroicons/react/outline'
 
 import WidgetLayout from "../WidgetLayout";
@@ -12,6 +14,8 @@ import { useSession, getSession } from "next-auth/react"
 const AddressesTab = () => {
     const { data : addressess, error : categoriesError} = getAddresses();
     const [filteredAddressess, setFilteredAddressess] = useState<any[]>();
+
+    const { emitNotification } = NotificationEmitter();
 
     const { data: session, status } = useSession();
 
@@ -28,7 +32,7 @@ const AddressesTab = () => {
         var id = event.target.id.value;
         await deleteAddress(id);
         
-        alert("Morada removida")
+        emitNotification("success", "Morada removida");
     }
 
     return (

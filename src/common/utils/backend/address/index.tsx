@@ -1,4 +1,4 @@
-import useSWR from 'swr'
+import useSWR, { mutate, useSWRConfig } from 'swr'
 
 import { apiURL } from "../config";
 
@@ -10,8 +10,6 @@ export const getAddress = (id) => {
 }
 
 export const getAddresses = () => {
-    console.log()
-
     const fetcher = (url) => fetch(url).then((res) => res.json());
     return useSWR(`${apiURL}/address/`, fetcher);
 }
@@ -26,6 +24,7 @@ export const createAddress = async (data) => {
             method: 'POST',
         })
         const result = await response.json();
+        mutate(`${apiURL}/address/`);
         return result;
     }
     catch(error) {
@@ -39,6 +38,7 @@ export const deleteAddress = async (id) => {
             method: 'DELETE'
         })
         const result = await response.json();
+        mutate(`${apiURL}/address/`);
         return result;
     }
     catch(error) {

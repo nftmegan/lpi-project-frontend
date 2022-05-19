@@ -13,7 +13,6 @@ import { getProducts, deleteProduct } from "../../../utils/backend/product";
 
 const ProductsPage = () => {
     const { data : products, error : productsError} = getProducts();
-    const [filteredProducts, setFilteredProducts] = useState<any[]>();
 
     const [newProductModalOpen, setNewProductModalOpen] = useState(false);
 
@@ -27,10 +26,6 @@ const ProductsPage = () => {
         
         alert("Produto removido")
     }
-
-    useEffect(() => {
-        setFilteredProducts(products ? products.filter(c => { return true }) : products);
-    }, [products]);
 
     return (
         <div>
@@ -62,59 +57,62 @@ const ProductsPage = () => {
                             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
                                 <table className="min-w-full divide-y divide-gray-300">
                                     <thead className="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                            
-                                        </th>
-                                        <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                            Nome
-                                        </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                            Descrição
-                                        </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                            Categoria
-                                        </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                            Preço
-                                        </th>
-                                        <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                            <span className="sr-only">Editar</span>
-                                        </th>
-                                    </tr>
+                                        <tr>
+                                            <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                                
+                                            </th>
+                                            <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                                Nome
+                                            </th>
+                                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                Descrição
+                                            </th>
+                                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                Categoria
+                                            </th>
+                                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                Preço
+                                            </th>
+                                            <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                                                <span className="sr-only">Editar</span>
+                                            </th>
+                                        </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-200 bg-white">
-                                    {filteredProducts?.map((product, productIdx) => (
-                                        <tr key={product._id} className={productIdx % 2 === 0 ? undefined : 'bg-gray-50'}>
-                                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                                                <div className="flex items-center">
-                                                    <div className="h-14 w-14 flex-shrink-0">
-                                                        <img className="h-14 w-14" src={`http://localhost:8000/api/uploads/${product.photo_path}`} alt="" />
+                                        {products?.map((product, productIdx) => (
+                                            <tr key={product._id} className={productIdx % 2 === 0 ? undefined : 'bg-gray-50'}>
+                                                <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                                    <div className="flex items-center">
+                                                        <div className="h-14 w-14 flex-shrink-0">
+                                                            <img className="h-14 w-14" src={`http://localhost:8000/api/uploads/${product.photo_path}`} alt="" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <div className="text-gray-900">{product.name}</div>
-                                            </td>
-                                            
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <div className="text-gray-900">{product.description}</div>
-                                            </td>
+                                                </td>
+                                                
+                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    <div className="text-gray-900">{product.name}</div>
+                                                </td>
+                                                
+                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    <div className="text-gray-900">{product.description}</div>
+                                                </td>
 
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <div className="text-gray-900">{product.category}</div>
-                                            </td>
+                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    <div className="text-gray-900">{product.category.name}</div>
+                                                </td>
 
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{product.price}€</td>
+                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{product.price}€</td>
 
-                                            <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                                                    Editar
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                                <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                                    <form onSubmit={deleteProductRequest}>
+                                                        <input type="hidden" name="id" value={product._id}/>
+                                                        <button type="submit" className="text-indigo-600 hover:text-indigo-900">
+                                                            Remover
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </table>
                             </div>
