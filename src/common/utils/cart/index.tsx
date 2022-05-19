@@ -63,6 +63,10 @@ export const getUserCartUtil = async () => {
 }
 
 const getCartProductData = async (cart) => {
+    if(!cart)
+        return [];
+
+
     var ids = "";
     cart.forEach((e) => {
         ids = ids.concat(e.productId + ',');
